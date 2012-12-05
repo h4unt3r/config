@@ -1,0 +1,13 @@
+python << EOF
+def loadPlugins():
+	import vim
+	import glob
+	PLUGINPATH = vim.eval("$HOME") + "/.vimfiles/plugin/python"
+	plugins = glob.glob("%s/*.vim" % PLUGINPATH)
+	for plug in plugins:
+		try: vim.command("source %s" % plug)
+		except vim.error:
+			vim.command("echom 'Failed to import %s'" % plug)
+
+loadPlugins()
+EOF
