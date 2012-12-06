@@ -32,8 +32,8 @@ nnoremap <right> >>
 vnoremap <left> <gv
 vnoremap <right> >gv
 
-nnoremap <leader>c <home>i--<esc>j<home>
-nnoremap <leader>u <home>xx<esc>j<home>
+nnoremap <leader>c <home>i#<esc>j<home>
+nnoremap <leader>u <home>x<esc>j<home>
 nnoremap <leader>t vl:s/\t/    /g<cr>:let @/ = ""<cr>:echo<cr>
 nnoremap <leader>tt vl:s/    /\t/g<cr>:let @/ = ""<cr>:echo<cr>
 
@@ -41,7 +41,19 @@ nnoremap + <c-w>+
 nnoremap - <c-w>-
 
 if has("python")
-	source $HOME/.vimpyrc
+python << EOF
+def loadPlugins():
+	import vim
+	import glob
+	PLUGINPATH = vim.eval("$HOME") + "/.vimfiles/plugin/python"
+	plugins = glob.glob("%s/*.vim" % PLUGINPATH)
+	for plug in plugins:
+		try: vim.command("source %s" % plug)
+		except vim.error:
+			vim.command("echom 'Failed to import %s'" % plug)
+
+loadPlugins()
+EOF
 else
 	echom "No python, cant load python plugins! :0"
 endif
