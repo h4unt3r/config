@@ -1,3 +1,10 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
 alias l='ls -A --color=auto'
 alias ls='ls --color=auto'
 alias ll='ls -Alh'
@@ -33,3 +40,9 @@ function exitok {
 }
    
 PROMPT_COMMAND=exitok
+
+# If we are on /dev/tty1 and not root then startx
+if [ -z "$DISPLAY" ] && [ $(tty) == /dev/tty1 ] && [ "$UID" -ne 0 ]; then
+	startx
+fi
+
