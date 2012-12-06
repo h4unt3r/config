@@ -14,7 +14,7 @@ alias pacupd='pacman -Syy'
 alias pacupg='pacman -Syu'
 alias pacfind='pacman -Ss | grep'
 
-OFF="\e[m\]"
+OFF="\e[m"
 CYN="\e[36m"
 RED="\e[31m"
 GRE="\e[32m"
