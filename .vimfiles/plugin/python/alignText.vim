@@ -1,5 +1,5 @@
-vnoremap <leader>a <esc>:py alignText()<cr>
-nnoremap <leader>a :py alignText()<cr>
+vnoremap <leader>at <esc>:py alignText()<cr>gv
+nnoremap <leader>at :py alignText()<cr>
 python << EOF
 import vim
 
