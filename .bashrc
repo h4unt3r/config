@@ -41,8 +41,8 @@ function exitok {
    
 PROMPT_COMMAND=exitok
 
-# If we are on /dev/tty1 and not root then startx
-if [ -z "$DISPLAY" ] && [ $(tty) == /dev/tty1 ] && [ "$UID" -ne 0 ]; then
+# If we are on /dev/tty6 and not root then startx
+if [ -z "$DISPLAY" ] && [ $(tty) == /dev/tty6 ] && [ "$UID" -ne 0 ]; then
 	startx
 fi
 
