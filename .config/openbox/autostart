@@ -20,6 +20,6 @@ tint2 &
 tilda &
 (sleep 3 && conky) &
 (sleep 2 && clipit) &
-(sleep 2 && volwheel) &
+(sleep 2 && volumeicon) &
 (sleep 2 && xcompmgr -c) &
 (sleep 1 && xfce4-power-manager) &
