@@ -4,6 +4,7 @@ set ts=4 sw=4 noet
 set nowrap
 set nobackup
 set mouse=""
+set backspace=indent
 
 " Custom mappings etc
 "   Editing vim config
@@ -37,8 +38,13 @@ nnoremap <leader>u <home>x<esc>j<home>
 nnoremap <leader>t vl:s/\t/    /g<cr>:let @/ = ""<cr>:echo<cr>
 nnoremap <leader>tt vl:s/    /\t/g<cr>:let @/ = ""<cr>:echo<cr>
 
+" teh winsize
 nnoremap + <c-w>+
 nnoremap - <c-w>-
+
+" teh folding
+nnoremap zz va)zfjjj
+vnoremap zz zfjjj
 
 if has("python")
 python << EOF
