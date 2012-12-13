@@ -12,6 +12,15 @@ autocmd BufWinEnter ?* silent loadview
 
 " Use foldmarkers...
 set foldmethod=marker
+if &ft == "vim"
+    set cms="\ FOLD\ %s
+elseif &ft == "maxscript"
+    set cms=\-\-\ FOLD\ %s
+elseif &ft == "python"
+    set cms=#\ FOLD\ %s
+else
+    set cms=//\ FOLD\ %s
+endif
 
 " Custom mappings etc
 "   Editing vim config
