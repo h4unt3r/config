@@ -6,6 +6,13 @@ set nobackup
 set mouse=""
 set backspace=indent
 
+" Auto save/load views
+autocmd BufWinLeave ?* mkview
+autocmd BufWinEnter ?* silent loadview
+
+" Use foldmarkers...
+set foldmethod=marker
+
 " Custom mappings etc
 "   Editing vim config
 nnoremap <leader>ev :e $MYVIMRC<cr>
@@ -33,8 +40,12 @@ nnoremap <right> >>
 vnoremap <left> <gv
 vnoremap <right> >gv
 
-nnoremap <leader>c <home>i#<esc>j<home>
-nnoremap <leader>u <home>x<esc>j<home>
+"   Maxscript commenting
+nnoremap <leader>c <home>i--<esc>j<home>
+nnoremap <leader>u <home>xx<esc>j<home>
+"   Python commenting
+"nnoremap <leader>c <home>i#<esc>j<home>
+"nnoremap <leader>u <home>x<esc>j<home>
 nnoremap <leader>t vl:s/\t/    /g<cr>:let @/ = ""<cr>:echo<cr>
 nnoremap <leader>tt vl:s/    /\t/g<cr>:let @/ = ""<cr>:echo<cr>
 
