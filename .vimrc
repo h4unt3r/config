@@ -12,15 +12,21 @@ autocmd BufWinEnter ?* silent loadview
 
 " Use foldmarkers...
 set foldmethod=marker
-if &ft == "vim"
-    set cms="\ FOLD\ %s
-elseif &ft == "maxscript"
-    set cms=\-\-\ FOLD\ %s
-elseif &ft == "python"
-    set cms=#\ FOLD\ %s
-else
-    set cms=//\ FOLD\ %s
-endif
+function SetCMS ()
+	if &ft == "vim"
+		let comment='"'
+	elseif &ft == "maxscript"
+		let comment='--'
+	elseif &ft == "python"
+		let comment='#'
+	else
+		let comment='//'
+	endif
+	exec 'set cms='.comment.'\ FOLD\ %s'
+	exec 'nnoremap <leader>c 0i'.comment.'<esc>j'
+	exec 'nnoremap <leader>u 0'.strlen(comment).'xj'
+endfunction
+autocmd FileType ?* call SetCMS()
 
 " Custom mappings etc
 "   Editing vim config
@@ -49,12 +55,6 @@ nnoremap <right> >>
 vnoremap <left> <gv
 vnoremap <right> >gv
 
-"   Maxscript commenting
-nnoremap <leader>c <home>i--<esc>j<home>
-nnoremap <leader>u <home>xx<esc>j<home>
-"   Python commenting
-"nnoremap <leader>c <home>i#<esc>j<home>
-"nnoremap <leader>u <home>x<esc>j<home>
 nnoremap <leader>t vl:s/\t/    /g<cr>:let @/ = ""<cr>:echo<cr>
 nnoremap <leader>tt vl:s/    /\t/g<cr>:let @/ = ""<cr>:echo<cr>
 
