@@ -3,16 +3,28 @@ set bg=dark
 set ts=4 sw=4 noet
 set nowrap
 set nobackup
-set mouse=""
+set mouse=n
 set backspace=indent
 
 " Auto save/load views
 autocmd BufWinLeave ?* mkview
 autocmd BufWinEnter ?* silent loadview
 
+" Source visually selected lines
+function! SourceLines () range
+	if a:firstline == a:lastline
+		let s:cmd = getline(a:firstline)
+	else
+		let s:cmd = join(getline(a:firstline, a:lastline), "\n")
+	endif
+	exec s:cmd
+endfunction
+nnoremap <leader>so :call SourceLines()<cr>
+vnoremap <leader>so :call SourceLines()<cr>
+
 " Use foldmarkers...
 set foldmethod=marker
-function SetCMS ()
+function! SetCMS ()
 	if &ft == "vim"
 		let comment='"'
 	elseif &ft == "maxscript"
