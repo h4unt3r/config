@@ -32,7 +32,7 @@ endfunction
 function! LoadPlugins (plugpath)
 	let l:files = split(glob(a:plugpath."*.vim"),"\n")
 	for l:plug in l:files
-		echom l:plug
+"		echom l:plug
 		exec "source ".l:plug
 "		call ParseMappings(l:plug)
 	endfor
