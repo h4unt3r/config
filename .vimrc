@@ -7,8 +7,8 @@ set mouse=n
 set backspace=indent
 
 " Auto save/load views
-autocmd BufWinLeave ?* mkview
-autocmd BufWinEnter ?* silent loadview
+"autocmd BufWinLeave ?* mkview
+"autocmd BufWinEnter ?* silent loadview
 
 " Custom mappings etc
 "   Editing vim config
@@ -49,5 +49,13 @@ nnoremap zz va)zfjjj
 vnoremap zz zfjjj
 
 " Plugins!
-source ~/.vimfiles/plugin/plugins.vim
-call LoadPlugins()
+if has("win32")
+	let g:vimfilepath = "~/config/.vimfiles/"
+else
+	let g:vimfilepath = "~/.vimfiles/"
+endif
+exec "source ".g:vimfilepath."plugin/plugins.vim"
+call LoadPlugins(g:vimplugpath)
+if has("python")
+	call LoadPlugins(g:pyplugpath)
+endif

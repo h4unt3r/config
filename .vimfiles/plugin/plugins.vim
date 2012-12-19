@@ -9,8 +9,8 @@ let g:plugmgr = {}
 "endfunction
 
 " Plugin paths
-let g:vimplugpath = ".vimfiles/plugin/vim/"
-let g:pyplugpath  = ".vimfiles/plugin/python/"
+let g:vimplugpath = g:vimfilepath."plugin/vim/"
+let g:pyplugpath = g:vimfilepath."plugin/python/"
 
 " Needs work for multiple mappings in a file
 function! ParseMappings (plug)
@@ -29,15 +29,11 @@ function! ParseMappings (plug)
 	let g:plugmgr[a:plug] = l:maps
 endfunction
 
-function! LoadPlugins ()
-	for l:plug in glob(g:vimplugpath."*.vim",0,1)
-"		echom l:plug
+function! LoadPlugins (plugpath)
+	let l:files = split(glob(a:plugpath."*.vim"),"\n")
+	for l:plug in l:files
+		echom l:plug
 		exec "source ".l:plug
-		call ParseMappings(l:plug)
-	endfor
-	for l:plug in glob(g:pyplugpath."*.vim",0,1)
-"		echom l:plug
-		exec "source ".l:plug
-		call ParseMappings(l:plug)
+"		call ParseMappings(l:plug)
 	endfor
 endfunction
