@@ -50,8 +50,10 @@ vnoremap zz zfjjj
 
 " Plugins!
 if has("win32")
+	set dir=c:\\temp
 	let g:vimfilepath = "~/config/.vimfiles/"
 else
+	set dir=/tmp
 	let g:vimfilepath = "~/.vimfiles/"
 endif
 exec "source ".g:vimfilepath."plugin/plugins.vim"
