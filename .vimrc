@@ -5,6 +5,7 @@ set nowrap
 set nobackup
 set mouse=n
 set backspace=indent
+filetype plugin indent on
 
 " Auto save/load views
 "autocmd BufWinLeave ?* mkview
