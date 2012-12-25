@@ -52,13 +52,21 @@ vnoremap zz zfjjj
 " Plugins!
 if has("win32")
 	set dir=c:\\temp
-	let g:vimfilepath = "~/config/.vimfiles/"
+	if !exists("g:vimfilepath")
+		let g:vimfilepath = "~/config/.vimfiles/"
+	endif
 else
 	set dir=/tmp
-	let g:vimfilepath = "~/.vimfiles/"
+	if !exists("g:vimfilepath")
+		let g:vimfilepath = "~/.vimfiles/"
+	endif
 endif
-exec "source ".g:vimfilepath."plugin/plugins.vim"
-call LoadPlugins(g:vimplugpath)
-if has("python")
-	call LoadPlugins(g:pyplugpath)
+if isdirectory(expand(g:vimfilepath))
+	exec "source ".g:vimfilepath."plugin/plugins.vim"
+	call LoadPlugins(g:vimplugpath)
+	if has("python")
+		call LoadPlugins(g:pyplugpath)
+	endif
+else
+	echom "Failed to load plugins, g:vimfilepath doesnt exist"
 endif
