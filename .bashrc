@@ -10,6 +10,7 @@ alias ls='ls --color=auto'
 alias ll='ls -Alh'
 alias l.='ls -d .* --color=auto'
 
+alias cdp='cd $OLDPWD'
 alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../../../'
