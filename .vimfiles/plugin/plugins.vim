@@ -16,7 +16,7 @@ let g:pyplugpath = g:vimfilepath."plugin/python/"
 function! ParseMappings (plug)
 	let l:lines = readfile(a:plug)
 	for l:line in l:lines
-		let l:pattern = '\([vni]\)\=\(no\)\=.*map\s\+\(.\{-}\)\s\+\(.*\)'
+		let l:pattern = '\([vni]\)\=\(nore\)\=map\s\+\(.\{-}\)\s\+\(.*\)'
 		if match(l:line, l:pattern) == 0
 			let l:maps = []
 			let l:matches = split(substitute(l:line,l:pattern,'\1\n\3\n\4',""),"\n")
