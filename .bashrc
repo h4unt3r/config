@@ -10,12 +10,14 @@ alias ls='ls --color=auto'
 alias ll='ls -Alh'
 alias l.='ls -d .* --color=auto'
 
-alias cdp='cd $OLDPWD'
+alias cdpwd='cd $OLDPWD'
 alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../../../'
 alias ....='cd ../../../../'
+
 alias mount='mount | column -t'
+alias kkill='pkill -KILL'
 
 alias pacin='pacman --needed -S'
 alias pacupd='pacman -Syy'
@@ -45,5 +47,15 @@ PROMPT_COMMAND=exitok
 # If we are on /dev/tty6 and not root then startx
 if [ -z "$DISPLAY" ] && [ $(tty) == /dev/tty6 ] && [ "$UID" -ne 0 ]; then
 	startx
+elif [ -f "$(which fortune)" ] && [ -f "$(which cowsay)" ]; then
+	if [ "$UID" -eq 0 ]; then
+		echo -ne "\e[31m"
+		fortune | cowsay -f daemon
+		echo ""
+	else
+		echo -ne "\e[32m"
+		fortune | cowsay -f tux
+		echo ""
+	fi
 fi
 
