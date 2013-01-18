@@ -5,6 +5,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+PATH=$PATH:~/bin
+
 alias l='ls -A --color=auto'
 alias ls='ls --color=auto'
 alias ll='ls -Alh'
@@ -19,10 +21,16 @@ alias ....='cd ../../../../'
 alias mount='mount | column -t'
 alias kkill='pkill -KILL'
 
+# Pacman
 alias pacin='pacman --needed -S'
 alias pacupd='pacman -Syy'
 alias pacupg='pacman -Syu'
 alias pacfind='pacman -Ss | grep'
+
+# Yum
+alias yumin='yum -y install'
+alias yumup='yum -y update'
+alias yumfind='yum search'
 
 OFF="\e[m"
 CYN="\e[36m"
