@@ -32,13 +32,13 @@ alias yumin='yum -y install'
 alias yumup='yum -y update'
 alias yumfind='yum search'
 
-OFF="\e[m"
-CYN="\e[36m"
-RED="\e[31m"
-GRE="\e[32m"
-BLU="\e[34m"
-PIN="\e[35m"
-BOLD="\e[1m"
+OFF="\[\e[m\]"
+CYN="\[\e[36m\]"
+RED="\[\e[31m\]"
+GRE="\[\e[32m\]"
+BLU="\[\e[34m\]"
+PIN="\[\e[35m\]"
+BOLD="\[\e[1m\]"
 
 function exitok {
    RET="$?"
