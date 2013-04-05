@@ -19,7 +19,7 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 "   Files
 nnoremap <leader>w :w<CR>
 nnoremap <leader>wq :wq<CR>
-nnoremap <leader>qq :q!<CR>
+nnoremap <leader>qq :qa!<CR>
 nnoremap <leader>ww :w!<CR>
 "   Open a file relative to file editing if its in a string
 function! SplitFile( file, ... )
@@ -43,6 +43,7 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 inoremap <esc> <nop>
 inoremap jk <esc>
+inoremap kj <esc>O
 
 nnoremap <up> ddkkp
 nnoremap <down> ddp
