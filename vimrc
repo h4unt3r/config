@@ -3,7 +3,7 @@ set bg=dark
 set ts=4 sw=4 noet
 set nowrap
 set nobackup
-set mouse=n
+set mouse=
 set backspace=indent
 filetype plugin indent on
 
@@ -19,8 +19,22 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 "   Files
 nnoremap <leader>w :w<CR>
 nnoremap <leader>wq :wq<CR>
-nnoremap <leader>qq :q!<CR>
+nnoremap <leader>qq :qa!<CR>
 nnoremap <leader>ww :w!<CR>
+"   Open a file relative to file editing if its in a string
+function! SplitFile( file, ... )
+	" If true passed, split vertical
+	if a:0 && a:1 
+		let l:basecmd = "vsp"
+	else
+		let l:basecmd = "sp"
+	endif
+	exec l:basecmd." ".fnamemodify(expand('%'),":h")."/".a:file
+endfunction
+nnoremap <leader>vsf ""yi":call SplitFile(@",1)<CR><C-w>r
+nnoremap <leader>sf ""yi":call SplitFile(@",0)<CR>
+vnoremap <leader>vsf ""y:call SplitFile(@",1)<CR><C-w>r
+vnoremap <leader>sf ""y:call SplitFile(@",0)<CR>
 
 "   Movement / changing modes
 inoremap <up> <nop>
@@ -45,6 +59,11 @@ nnoremap <leader>tt vl:s/    /\t/g<cr>:let @/ = ""<cr>:echo<cr>
 " teh winsize
 nnoremap + <c-w>+
 nnoremap - <c-w>-
+" moving through windows
+nnoremap <leader>l 1000<C-w><<C-w>l0
+nnoremap <leader>h 1000<C-w><<C-w>h0
+nnoremap <leader>j 1000<C-w>-<C-w>j0
+nnoremap <leader>k 1000<C-w>-<C-w>k0
 
 " teh folding
 nnoremap zz va)zfjjj
