@@ -29,6 +29,7 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 inoremap <esc> <nop>
 inoremap jk <esc>
+inoremap kj <esc>O
 
 nnoremap <up> ddkkp
 nnoremap <down> ddp
@@ -50,23 +51,11 @@ nnoremap zz va)zfjjj
 vnoremap zz zfjjj
 
 " Plugins!
+call plugins#LoadPlugins(expand("~/.vim/autoload/vim/"    ))
+call plugins#LoadPlugins(expand("~/.vim/autoload/python/" ))
+
 if has("win32")
 	set dir=c:\\temp
-	if !exists("g:vimfilepath")
-		let g:vimfilepath = "~/config/.vimfiles/"
-	endif
 else
 	set dir=/tmp
-	if !exists("g:vimfilepath")
-		let g:vimfilepath = "~/.vimfiles/"
-	endif
-endif
-if isdirectory(expand(g:vimfilepath))
-	exec "source ".g:vimfilepath."plugin/plugins.vim"
-	call LoadPlugins(g:vimplugpath)
-	if has("python")
-		call LoadPlugins(g:pyplugpath)
-	endif
-else
-	echom "Failed to load plugins, g:vimfilepath doesnt exist"
 endif

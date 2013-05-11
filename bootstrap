@@ -1,0 +1,41 @@
+#!/bin/bash
+if [ ! -f "README" ]; then
+	echo 'Please do not run this outside the config folder!' >&2
+	exit 1
+fi
+
+# Files to bootstrap
+FILES="bashrc conkyrc gitconfig vim vimrc xinitrc"
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+OFF=$(tput sgr0)
+
+if [ "$1" == "-u" ]; then
+	# Uninstall
+	for dotfile in $FILES; do
+		if [ -h ~/.$dotfile ] && [ $(readlink ~/.$dotfile) == $PWD/$dotfile ]; then
+			t=$(printf "Removed './%s' -> '~/.%s'" $dotfile $dotfile)
+			rm ~/.$dotfile  &>> bootstrap.log
+			if [ $? -eq 0 ]; then
+				col=$(( $(tput cols) - ${#t} ))
+				printf "%s%${col}s\n" "$t" "[${GREEN}OK${OFF}]"
+			else
+				col=$(( $(tput cols) - ${#t} + 1 ))
+				printf "%s%${col}s\n" "$t" "[${RED}FUCK${OFF}]"
+			fi
+		fi
+	done
+else
+	for dotfile in $FILES; do
+		t=$(printf "Linked './%s' -> '~/.%s'" $dotfile $dotfile)
+		ln -s $PWD/$dotfile ~/.$dotfile &>> bootstrap.log
+
+		if [ $? -eq 0 ] && [ -e $dotfile ]; then
+			col=$(( $(tput cols) - ${#t} ))
+			printf "%s%${col}s\n" "$t" "[${GREEN}OK${OFF}]"
+		else
+			col=$(( $(tput cols) - ${#t} + 1 ))
+			printf "%s%${col}s\n" "$t" "[${RED}FUCK${OFF}]"
+		fi
+	done
+fi
